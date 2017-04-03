@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Lomont;
 
 public class MicGrabber : MonoBehaviour {
 
@@ -34,6 +35,7 @@ public class MicGrabber : MonoBehaviour {
 	//and rename it to "Volume"
 	public AudioMixer m_masterMixer;
 
+	LomontFFT m_fft = new LomontFFT();
 
 	float m_timeSinceRestart = 0;
 
@@ -73,12 +75,9 @@ public class MicGrabber : MonoBehaviour {
 		DisableSound(!m_disableOutputSound);
 		m_audioSource.GetOutputData(m_extractedData,0);
 
-		//float acc = 0;
-		//for (int i = 0; i < m_extractedData.Length; i++)
-		//	acc += m_extractedData[i];
-
-		//if (acc > 1)
-		//Debug.Log(acc);
+		double[] doubleData = Array.ConvertAll(m_extractedData, x => (double)x);
+		m_fft.FFT(doubleData, true);
+		m_extractedData = Array.ConvertAll(doubleData, x => (float)x);
 	}
 
 
@@ -151,7 +150,7 @@ public class MicGrabber : MonoBehaviour {
 			//pause a little before setting clip to avoid lag and bugginess
 			if (Time.time - m_timeSinceRestart > 0.5f && !Microphone.IsRecording(null))
 			{
-				m_audioSource.clip = Microphone.Start(null, true, 2, 44100);
+				m_audioSource.clip = Microphone.Start(null, true, 1, 44100);
 
 				//wait until microphone position is found (?)
 				while (!(Microphone.GetPosition(null) > 0))

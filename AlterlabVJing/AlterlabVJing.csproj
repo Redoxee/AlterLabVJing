@@ -73,6 +73,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MidiJack\Midi.cs" />
@@ -119,6 +125,7 @@
     <Compile Include="Assets\Reaktion\Utility\VariableMotion.cs" />
     <Compile Include="Assets\Scripts\DebugMicDrawer.cs" />
     <Compile Include="Assets\Scripts\FadeInFadeOutControl.cs" />
+    <Compile Include="Assets\Scripts\LomontFFT.cs" />
     <Compile Include="Assets\Scripts\MicGrabber.cs" />
     <Compile Include="Assets\Scripts\SoundToTexture.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class SoundToTexture : MonoBehaviour {
 	Texture2D m_soundTexture = null;
 	RenderTexture m_pastTexture = null;
 	RenderTexture m_pastTexture1 = null;
-	bool m_firstTexture = false;
+
 
 	[Header("First pass")]
 	public Material m_firstPassMaterial = null;
@@ -24,6 +24,8 @@ public class SoundToTexture : MonoBehaviour {
 	{
 		m_pastTexture = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat);
 		m_pastTexture1 = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat);
+		//m_pastTexture.wrapMode = TextureWrapMode.Clamp;
+		//m_pastTexture1.wrapMode = TextureWrapMode.Clamp;
 
 		m_soundTexture = new Texture2D(m_soundFeed.m_extractedData.Length, 1, TextureFormat.RFloat, false);
 		m_firstCamera.targetTexture = m_pastTexture;
@@ -43,6 +45,7 @@ public class SoundToTexture : MonoBehaviour {
 
 	void Update () {
 		var data = m_soundFeed.m_extractedData;
+		
 		for (int i = 0; i < data.Length; ++i)
 		{
 			m_soundTexture.SetPixel(i, 0, new Color(data[i], 0, 0));

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,10 @@ public class DebugMicDrawer : MonoBehaviour {
 	private void Update()
 	{
 		var data = micGrabber.m_extractedData;
+
+		//double[] doubleData = Array.ConvertAll(data, x => (double)x);
+		//m_fft.FFT(doubleData, true);
+		//data = Array.ConvertAll(doubleData, x => (float)x);
 
 		var step = 1f / data.Length;
 

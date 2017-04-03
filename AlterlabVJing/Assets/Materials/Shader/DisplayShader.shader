@@ -62,18 +62,22 @@
 				float sampleX = atan2(uv_center.y, uv_center.x);
 				sampleX = sampleX / TPI + .5;
 
-				sampleX = frac(sampleX + _Time.y * .25);
+				sampleX = frac(sampleX + _Time.y * .125);
 
 				sampleX = abs(sampleX * 2. - 1.);
 				sampleX = abs(sampleX * 2. - 1.);
 				sampleX = abs(sampleX * 2. - 1.);
 
 
-				float dist = length(uv_center) ;
+				float dist = length(uv_center);
 
+				float ignoreLeft = .25;
+				sampleX = sampleX + ignoreLeft;
+				sampleX = sampleX / (1. + ignoreLeft);
 				for (float j = 0; j < NB_SAMPLE; j += 1.)
 				{
-					accumulator += tex2D(_MainTex, float2(sampleX * .125, dist * .5 + j *.005));
+
+					accumulator += tex2D(_MainTex, float2(sampleX, dist * .5 + j * 1. / 1024.));
 				}
 				accumulator /= NB_SAMPLE;
 
@@ -87,9 +91,7 @@
 				float f = circle;
 				float fade = 1. - pow(dist, 2.5) * 6.;
 				f *= fade;
-				float4 col = float4(1., 1., 1., 1.);
-				if(f> 0.)
-				 col = float4(f,0.,0.,1.);
+				float4 col = float4(f, 0., 0., 1.);
 				/*
 				float lineIn = tex2D(_MainTex, float2(i.uv.x, 0.)).x * .125;
 				lineIn = distance(uv.y - .5, lineIn);

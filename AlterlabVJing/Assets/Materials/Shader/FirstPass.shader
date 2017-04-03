@@ -49,15 +49,15 @@
 
 			float _Size = 1024.;
 
-#define DEFIL (8. / _Size)
+#define DEFIL (4. / _Size)
 
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float2 uv = i.uv;
 
-				float now = tex2D(_InputSound, float2(uv.x, .0)).x;
+				float now = tex2D(_InputSound, float2(uv.x*.125*.5, .0)).x * 4.;
 				
-
+				//now = sin(_Time.y + i.uv.x);
 				float4 col = float4(now,0.,0.,0.);
 
 				float coordY = uv.y;
