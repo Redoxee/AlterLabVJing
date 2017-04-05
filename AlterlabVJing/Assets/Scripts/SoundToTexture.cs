@@ -20,6 +20,13 @@ public class SoundToTexture : MonoBehaviour {
 	public GameObject m_firstOutQuad = null;
 	public Camera m_firstOutCamera = null;
 
+	[Header("Controls")]
+	public KeyCode m_disableKey = KeyCode.D;
+
+	bool m_isDisabled = false;
+
+	Color[] m_colors;
+
 	private void Start()
 	{
 		m_pastTexture = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat);
@@ -41,17 +48,30 @@ public class SoundToTexture : MonoBehaviour {
 		m_firstOutQuad.transform.localScale = new Vector3(ratio, 1, 1) * size * 2;
 		m_firstPassMaterial.mainTexture = m_pastTexture1;
 		m_firstPassMaterial.SetVector("_Resolution", new Vector4(Screen.width,Screen.height,ratio,0.0f));
+
+		m_colors = new Color[m_soundFeed.m_extractedData.Length];
 	}
 
-	void Update () {
+
+	void Update() {
 		var data = m_soundFeed.m_extractedData;
-		
-		for (int i = 0; i < data.Length; ++i)
-		{
-			m_soundTexture.SetPixel(i, 0, new Color(data[i], 0, 0));
-		}
+		m_colors = Array.ConvertAll<float, Color>(data, 
+			(f) => {
+				return new Color(!m_isDisabled? f : 0, 0, 0);
+			});
+		m_soundTexture.SetPixels(0, 0, data.Length, 1, m_colors);
+
+		//for (int i = 0; i < data.Length; ++i)
+		//{
+		//	m_soundTexture.SetPixel(i, 0, new Color(data[i], 0, 0));
+		//}
 		m_soundTexture.Apply();
 		Graphics.Blit(m_pastTexture, m_pastTexture1);
 
+
+		if(Input.GetKeyDown(m_disableKey))
+		{
+			m_isDisabled = !m_isDisabled;
+		}
 	}
 }

@@ -55,7 +55,7 @@
 			{
 				float2 uv = i.uv;
 
-				float now = tex2D(_InputSound, float2(uv.x*.125*.5, .0)).x * 4.;
+				float now = tex2D(_InputSound, float2(uv.x*.125, .0)).x;
 				
 				//now = sin(_Time.y + i.uv.x);
 				float4 col = float4(now,0.,0.,0.);

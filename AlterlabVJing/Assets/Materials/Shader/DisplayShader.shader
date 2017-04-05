@@ -40,15 +40,29 @@
 			
 			sampler2D _MainTex;
 			float4 _Resolution;
-#define NB_SAMPLE 1.
+#define NB_SAMPLE 8.
 #define Smooth(p,r,s) smoothstep(-s, s, p-(r))
 
 #define PI 3.14159
 #define TPI (PI * 2.)
 #define HPI (PI * .5)
 
+#define SFactor (.25)
+
+
+			// from http://iquilezles.org/www/articles/smin/smin.htm
+			// polynomial smooth min (k = 0.1);
+			float smin(float a, float b, float k)
+			{
+				float h = clamp(0.5 + 0.5*(b - a) / k, 0.0, 1.0);
+				return lerp(b, a, h) - k*h*(1.0 - h);
+			}
+
 			fixed4 frag (v2f i) : SV_Target
 			{
+				float radius = .25;
+				float thickness = .015;
+
 				float2 uv = i.uv;
 				//return tex2D(_MainTex, i.uv) * 5.;
 				uv.x *= _Resolution.z;
@@ -59,39 +73,44 @@
 
 				float2 uv_center = uv - center;
 
+				float dist = length(uv_center);
+
 				float sampleX = atan2(uv_center.y, uv_center.x);
 				sampleX = sampleX / TPI + .5;
 
-				sampleX = frac(sampleX + _Time.y * .125);
+				//sampleX += dist;
+				sampleX = frac(sampleX + _Time.y * .025);
 
-				sampleX = abs(sampleX * 2. - 1.);
-				sampleX = abs(sampleX * 2. - 1.);
-				sampleX = abs(sampleX * 2. - 1.);
+				sampleX = frac(sampleX * 2.);
 
+				sampleX = abs(sampleX - .5) * 2.;
 
-				float dist = length(uv_center);
-
-				float ignoreLeft = .25;
+				float ignoreLeft = .05;
 				sampleX = sampleX + ignoreLeft;
-				sampleX = sampleX / (1. + ignoreLeft);
-				for (float j = 0; j < NB_SAMPLE; j += 1.)
-				{
+				sampleX = sampleX * (1. - ignoreLeft);
+				sampleX *= .1;
+				
+				float sampleY = abs(dist - radius) * .5;
+				float ripple = tex2D(_MainTex, float2(sampleX, sampleY)).r * SFactor * .5 / (dist * .5);
 
-					accumulator += tex2D(_MainTex, float2(sampleX, dist * .5 + j * 1. / 1024.));
-				}
-				accumulator /= NB_SAMPLE;
+				radius += ripple;
 
-				float radius = .25;
-				float thickness = .015;
+				float decal = abs(tex2D(_MainTex, float2(sampleX,0.))).r * SFactor * .05;
 
-				radius += accumulator.x * .6;
+				radius += decal;
+				thickness += abs(tex2D(_MainTex, float2(0.05, 0.)).x) * SFactor * .2;
 
 				float circle = 1. - Smooth(distance(radius, length(uv_center)), thickness, thickness * .1);
 
 				float f = circle;
-				float fade = 1. - pow(dist, 2.5) * 6.;
+				float fade = 1. - pow(dist, 3.) * 6.;
 				f *= fade;
-				float4 col = float4(f, 0., 0., 1.);
+
+
+				//float mt = tex2D(_MainTex, float2(sampleX, 0.)).r * 10.;
+				//float dy = max(ddy(mt), 0.);
+				//float dx = ddx(mt);
+				float4 col = float4(f, 0.,0., 1.);
 				/*
 				float lineIn = tex2D(_MainTex, float2(i.uv.x, 0.)).x * .125;
 				lineIn = distance(uv.y - .5, lineIn);

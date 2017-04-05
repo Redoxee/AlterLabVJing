@@ -25,6 +25,9 @@ public class MicGrabber : MonoBehaviour {
      //an audio source also attached to the same object as this script is
      AudioSource m_audioSource;
 
+	[SerializeField]
+	public bool m_letMusicPlay = false;
+
 	//make an audio mixer from the "create" menu, then drag it into the public field on this script.
 	//double click the audio mixer and next to the "groups" section, click the "+" icon to add a 
 	//child to the master group, rename it to "microphone".  Then in the audio source, in the "output" option, 
@@ -49,6 +52,11 @@ public class MicGrabber : MonoBehaviour {
 		{
 			RestartMicrophoneListener();
 			StartMicrophoneListener();
+		}
+
+		if (m_letMusicPlay)
+		{
+			m_audioSource.Play();
 		}
 	}
 
@@ -84,15 +92,18 @@ public class MicGrabber : MonoBehaviour {
 	//stops everything and returns audioclip to null
 	public void StopMicrophoneListener()
 	{
-		//stop the microphone listener
-		m_microphoneListenerOn = false;
-		//reenable the master sound in mixer
-		m_disableOutputSound = false;
-		//remove mic from audiosource clip
-		m_audioSource.Stop();
-		m_audioSource.clip = null;
+		if (!m_letMusicPlay)
+		{
+			//stop the microphone listener
+			m_microphoneListenerOn = false;
+			//reenable the master sound in mixer
+			//m_disableOutputSound = false;
+			//remove mic from audiosource clip
+			m_audioSource.Stop();
+			m_audioSource.clip = null;
 
-		Microphone.End(null);
+			Microphone.End(null);
+		}
 	}
 
 
@@ -100,8 +111,11 @@ public class MicGrabber : MonoBehaviour {
 	{
 		//start the microphone listener
 		m_microphoneListenerOn = true;
-		//disable sound output (dont want to hear mic input on the output!)
-		m_disableOutputSound = true;
+		if (!m_letMusicPlay)
+		{
+			//disable sound output (dont want to hear mic input on the output!)
+			m_disableOutputSound = true;
+		}
 		//reset the audiosource
 		RestartMicrophoneListener();
 	}
@@ -133,12 +147,13 @@ public class MicGrabber : MonoBehaviour {
 	{
 
 		m_audioSource = GetComponent<AudioSource>();
+		if (!m_letMusicPlay)
+		{
+			//remove any soundfile in the audiosource
+			m_audioSource.clip = null;
 
-		//remove any soundfile in the audiosource
-		m_audioSource.clip = null;
-
-		m_timeSinceRestart = Time.time;
-
+			m_timeSinceRestart = Time.time;
+		}
 	}
 
 	//puts the mic into the audiosource
@@ -150,14 +165,17 @@ public class MicGrabber : MonoBehaviour {
 			//pause a little before setting clip to avoid lag and bugginess
 			if (Time.time - m_timeSinceRestart > 0.5f && !Microphone.IsRecording(null))
 			{
-				m_audioSource.clip = Microphone.Start(null, true, 1, 44100);
-
-				//wait until microphone position is found (?)
-				while (!(Microphone.GetPosition(null) > 0))
+				if (!m_letMusicPlay)
 				{
-				}
+					m_audioSource.clip = Microphone.Start(null, true, 1, 44100);
 
-				m_audioSource.Play(); // Play the audio source
+					//wait until microphone position is found (?)
+					while (!(Microphone.GetPosition(null) > 0))
+					{
+					}
+
+					m_audioSource.Play(); // Play the audio source
+				}
 			}
 		}
 	}
