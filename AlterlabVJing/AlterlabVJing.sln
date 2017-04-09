@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterlabVJing", "AlterlabVJing.csproj", "{FB82AB25-5EC9-E9AC-2A81-67AD2A46331C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterlabVJing.Editor", "AlterlabVJing.Editor.csproj", "{F7BA08BA-153E-CF02-8E9D-5DD0884C855E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{FB82AB25-5EC9-E9AC-2A81-67AD2A46331C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB82AB25-5EC9-E9AC-2A81-67AD2A46331C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB82AB25-5EC9-E9AC-2A81-67AD2A46331C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7BA08BA-153E-CF02-8E9D-5DD0884C855E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7BA08BA-153E-CF02-8E9D-5DD0884C855E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7BA08BA-153E-CF02-8E9D-5DD0884C855E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7BA08BA-153E-CF02-8E9D-5DD0884C855E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

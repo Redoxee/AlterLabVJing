@@ -7,8 +7,8 @@
 	}
 	SubShader
 	{
-		// No culling or depth
-		Cull Off ZWrite Off ZTest Always
+			Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
+			Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -48,6 +48,8 @@
 #define HPI (PI * .5)
 
 #define SFactor (.25)
+
+#define ALColor 140./255., 16./255., 34./255.
 
 
 			// from http://iquilezles.org/www/articles/smin/smin.htm
@@ -110,7 +112,7 @@
 				//float mt = tex2D(_MainTex, float2(sampleX, 0.)).r * 10.;
 				//float dy = max(ddy(mt), 0.);
 				//float dx = ddx(mt);
-				float4 col = float4(f, 0.,0., 1.);
+				float4 col = float4(ALColor, f);
 				/*
 				float lineIn = tex2D(_MainTex, float2(i.uv.x, 0.)).x * .125;
 				lineIn = distance(uv.y - .5, lineIn);

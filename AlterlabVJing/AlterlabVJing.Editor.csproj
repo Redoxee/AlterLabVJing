@@ -136,39 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MidiJack\Editor\MidiJackWindow.cs" />
-    <Compile Include="Assets\OscJack\Editor\OscJackWindow.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\AnimatorGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\CameraGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\ConstantMotionGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\GenericCurveGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\GenericGradientGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\GenericTriggerGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\GlobalSettingGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\JitterMotionGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\LightGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\MaterialGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\ParticleSystemGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\SpawnerGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Gear\TransformGearEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Injector\AudioInjectorEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Injector\BeatInjectorEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Injector\OscInjectorEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Internal\GenericLinkDrawer.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Internal\ModifierDrawer.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Internal\RemoteDrawer.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Internal\TriggerDrawer.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Reaktor\ReaktorEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\BandPassFilterEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\ConstantMotionEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\GenericAudioInputEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\JitterMotionEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\ObjectParticleSystem.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\PlanterEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\ReaktionWindow.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\SelfDestructionEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\SpawnerEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\TurbulentMotionEditor.cs" />
-    <Compile Include="Assets\Reaktion\Editor\Utility\VariableMotionEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\Shader\DisplayShader.shader" />

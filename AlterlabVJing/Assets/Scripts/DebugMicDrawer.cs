@@ -25,8 +25,6 @@ public class DebugMicDrawer : MonoBehaviour {
 			currentPos = pos;
 			m_recordedMax = Mathf.Max(data[i], m_recordedMax);
 		}
-
-		if(Time.frameCount % 60 == 0)
-			Debug.LogFormat("Recorded Max : {0}", m_recordedMax);
+	
 	}
 }
