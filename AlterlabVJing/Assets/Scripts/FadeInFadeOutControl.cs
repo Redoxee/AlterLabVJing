@@ -45,6 +45,5 @@ public class FadeInFadeOutControl : MonoBehaviour {
 		color.a = p;
 		m_mainMaterial.color = color;
 
-		Debug.LogFormat("Apply : {0}", p);
 	}
 }

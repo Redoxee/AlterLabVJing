@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 00054be8fa4c3b24286c8624ff5ca4f4
+timeCreated: 1491998161
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 256
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gill Sans Ultra Bold Condensed
+  fontNames:
+  - Gill Sans Ultra Bold Condensed
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

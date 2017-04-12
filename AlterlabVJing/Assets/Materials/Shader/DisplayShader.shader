@@ -4,6 +4,7 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Resolution("Resolution", Vector) = (1,1,0,0)
+		SFactor("Amplification",Float) = .05
 	}
 	SubShader
 	{
@@ -47,9 +48,10 @@
 #define TPI (PI * 2.)
 #define HPI (PI * .5)
 
-#define SFactor (.25)
+			float SFactor = .05;
 
 #define ALColor 140./255., 16./255., 34./255.
+//#define ALColor SFactor,SFactor,SFactor
 
 
 			// from http://iquilezles.org/www/articles/smin/smin.htm
@@ -79,7 +81,7 @@
 
 				float sampleX = atan2(uv_center.y, uv_center.x);
 				sampleX = sampleX / TPI + .5;
-
+				sampleX += dist * .25;
 				//sampleX += dist;
 				sampleX = frac(sampleX + _Time.y * .025);
 
