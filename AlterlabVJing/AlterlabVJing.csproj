@@ -81,6 +81,8 @@
     <Compile Include="Assets\Scripts\FadeInFadeOutControl.cs" />
     <Compile Include="Assets\Scripts\LomontFFT.cs" />
     <Compile Include="Assets\Scripts\MicGrabber.cs" />
+    <Compile Include="Assets\Scripts\PrevFrameFeeder.cs" />
+    <Compile Include="Assets\Scripts\QuadToCameraResizer.cs" />
     <Compile Include="Assets\Scripts\SoundToTexture.cs" />
     <Compile Include="Assets\Scripts\VjingParameterController.cs" />
   </ItemGroup>

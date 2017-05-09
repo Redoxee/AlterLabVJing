@@ -2,7 +2,8 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("Sound Texture", 2D) = "white" {}
+		_PrevFrame("Prev Frame",2D) = "white" {}
 		_Resolution("Resolution", Vector) = (1,1,0,0)
 		SFactor("Amplification",Float) = .05
 	}
@@ -40,6 +41,7 @@
 			}
 			
 			sampler2D _MainTex;
+			sampler2D _PrevFrame;
 			float4 _Resolution;
 #define NB_SAMPLE 8.
 #define Smooth(p,r,s) smoothstep(-s, s, p-(r))
@@ -65,7 +67,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float radius = .25;
-				float thickness = .015;
+				float thickness = .0075;
 
 				float2 uv = i.uv;
 				//return tex2D(_MainTex, i.uv) * 5.;
@@ -83,9 +85,9 @@
 				sampleX = sampleX / TPI + .5;
 				sampleX += dist * .25;
 				//sampleX += dist;
-				sampleX = frac(sampleX + _Time.y * .025);
+				sampleX = frac(sampleX + _Time.y * .05);
 
-				sampleX = frac(sampleX * 2.);
+				sampleX = frac(sampleX * 5.);
 
 				sampleX = abs(sampleX - .5) * 2.;
 
@@ -110,18 +112,10 @@
 				float fade = 1. - pow(dist, 3.) * 6.;
 				f *= fade;
 
-
-				//float mt = tex2D(_MainTex, float2(sampleX, 0.)).r * 10.;
-				//float dy = max(ddy(mt), 0.);
-				//float dx = ddx(mt);
-				float4 col = float4(ALColor, f);
-				/*
-				float lineIn = tex2D(_MainTex, float2(i.uv.x, 0.)).x * .125;
-				lineIn = distance(uv.y - .5, lineIn);
-				lineIn = 1. - Smooth(lineIn, .005, .005);
-				if(length(uv_center) > radius+thickness )
-					col += float4(lineIn, lineIn, lineIn, 0.);*/
-
+				float4 col;
+				col = tex2D(_PrevFrame, i.uv) * .99;
+				col = lerp(col, float4(ALColor, 1.), f);
+				
 				return col;
 			}
 			ENDCG
