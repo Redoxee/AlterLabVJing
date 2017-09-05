@@ -10,5 +10,7 @@ public class QuadToCameraResizer : MonoBehaviour {
 		float ratio = (float)Screen.height / (float)Screen.width;
 		var height = m_camera.orthographicSize * 2;
 		transform.localScale = new Vector3(height / ratio, height, 1);
+
+        Material mat = GetComponent<Renderer>().material;
 	}
 }

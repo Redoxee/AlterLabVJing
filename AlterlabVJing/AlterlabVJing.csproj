@@ -93,9 +93,11 @@
     <Compile Include="Assets\Scripts\PrevFrameFeeder.cs" />
     <Compile Include="Assets\Scripts\QuadToCameraResizer.cs" />
     <Compile Include="Assets\Scripts\SoundToTexture.cs" />
+    <Compile Include="Assets\Scripts\TextureGrabber.cs" />
     <Compile Include="Assets\Scripts\VjingParameterController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Shader\BigPath.shader" />
     <None Include="Assets\Materials\Shader\DisplayShader.shader" />
     <None Include="Assets\Materials\Shader\FirstPass.shader" />
     <None Include="Assets\Materials\Shader\SpherePass.shader" />

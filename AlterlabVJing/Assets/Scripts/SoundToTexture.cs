@@ -12,7 +12,8 @@ public class SoundToTexture : MonoBehaviour {
 
 	Texture2D m_soundTexture = null;
 	RenderTexture m_pastTexture = null;
-	RenderTexture m_pastTexture1 = null;
+    [NonSerialized]
+    public RenderTexture m_pastTexture1 = null;
 
 
 	[Header("First pass")]
@@ -27,7 +28,7 @@ public class SoundToTexture : MonoBehaviour {
 
 	Color[] m_colors;
 
-	private void Start()
+	private void Awake()
 	{
 		m_pastTexture = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat);
 		m_pastTexture1 = new RenderTexture(TextureSize, TextureSize, 0, RenderTextureFormat.RFloat);

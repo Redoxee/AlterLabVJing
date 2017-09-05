@@ -265,8 +265,8 @@
 				}
 
 
-				//return fixed4(0., 0., 0., 0.);
-				return float4(col.rgb,1.);
+				return fixed4(0., 0., 0., 0.);
+				//return float4(col.rgb,1.);
 			}
 			ENDCG
 
